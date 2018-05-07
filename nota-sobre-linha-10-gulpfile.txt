@@ -1,0 +1,6 @@
+Em nossa origem, nosso fluxo de leitura, usamos o glob
+pattern 'A/**/*
+Ele significa que não estamos dentro a pasta
+A, mas que estamos lendo são todos os arquivo, representado
+por * dentro de todos os diretórios, este último representado
+por **.
