@@ -9,10 +9,12 @@ const cssmin	   = require('gulp-cssmin');
 const rename	   = require('gulp-rename');
 const jshint	   = require('gulp-jshint');
 const lint		   = require('gulp-lint');
+const lreload	   = require('gulp-livereload');
 
 
 gulp.task('default', ['copy'], function(){
 	gulp.start('build-img','merge-css2','merge-js','html-replace');
+	//.pipe(lreload({start:true}));
 });
 
 //copia de images para dist(criando-a caso não exista)
@@ -67,7 +69,8 @@ gulp.task('merge-css2', function(){
 	.pipe(cssmin())
 	.pipe(rename('site.min.css'))
 	.pipe(gulp.dest('dist/css'))
-})
+	.pipe(lreload());
+});
 
 //minifica arquivos .js
 gulp.task('merge-js', function(){
@@ -90,3 +93,5 @@ gulp.task('dica-css', function(){
 	.pipe(lint())
 	.pipe(lint.reporter('default'));
 });
+
+//recarrega a página automaticamente quando um arquivo for salvo
