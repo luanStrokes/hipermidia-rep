@@ -9,25 +9,24 @@ const cssmin	   = require('gulp-cssmin');
 const rename	   = require('gulp-rename');
 const jshint	   = require('gulp-jshint');
 const lint		   = require('gulp-lint');
-const lreload	   = require('gulp-livereload');
+const errorHandler = require('gulp-error-handle');
 
 
-gulp.task('default', ['copy'], function(){
-	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css');
-	//.pipe(lreload({start:true}));
+gulp.task('criar-dist', ['copy'], function(){
+	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css','build');
 });
 
 //copia de images para dist(criando-a caso não exista)
 gulp.task('copy', ['clean'], function() {
 	return gulp.src('images/**/*')
-	.pipe(gulp.dest('dist') );
+	.pipe(gulp.dest('dist/images') );
 });
 
 //minifica as imagens de images e salva em dist
 gulp.task('build-img', function() {
 	gulp.src('images/**/*')
 	.pipe(gulpimagemin() )
-	.pipe(gulp.dest('dist') );
+	.pipe(gulp.dest('dist/images') );
 });
 
 //apaga dist
@@ -45,16 +44,13 @@ gulp.task('concatena-css', function(){
 
 gulp.task('html-replace', function(){
 	gulp.src('*.html')
-	.pipe(htmlReplace({css:'css/site.css'}))
+	.pipe(htmlReplace({css:'css/site.min.css'}))
 	.pipe(gulp.dest('dist'));
 });
 
 //minifica arquivos .css com cleanCSS
 gulp.task('merge-css', function(){
-	gulp.src(['css/bootstrap.css',
-			  'css/style2.css',
-			  'css/font-aewsome.css',
-			  'css/flaticon.css'])
+	gulp.src(['css/*.css'])
 	.pipe(concat('site.min.css')) //concatena para arquivo site.min.css
 	.pipe(cleanCSS())
 	.pipe(gulp.dest('dist/css'));
@@ -62,14 +58,10 @@ gulp.task('merge-css', function(){
 
 //minifica arquivos .css com cssmin
 gulp.task('merge-css2', function(){
-	gulp.src(['css/bootstrap.css',
-			  'css/style2.css',
-			  'css/font-aewsome.css',
-			  'css/flaticon.css'])
+	gulp.src(['css/*.css'])
 	.pipe(cssmin())
 	.pipe(rename('site.min.css'))
-	.pipe(gulp.dest('dist/css'))
-	.pipe(lreload());
+	.pipe(gulp.dest('dist/css'));
 });
 
 //minifica arquivos .js
@@ -90,8 +82,11 @@ gulp.task('dica-js', function(){
 //analisa e dá dicas sobre os arquivos .css
 gulp.task('dica-css', function(){
 	return gulp.src('css/**/*.css')
-	.pipe(lint())
-	.pipe(lint.reporter('default'));
+	.pipe(lint());;
 });
 
-//recarrega a página automaticamente quando um arquivo for salvo
+gulp.task('build', function() {
+  return gulp.src('dist/css/*.css')
+    .pipe(errorHandler())
+    .pipe(gulp.dest('dist/build'));
+});
