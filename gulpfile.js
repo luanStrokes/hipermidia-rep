@@ -13,7 +13,7 @@ const lreload	   = require('gulp-livereload');
 
 
 gulp.task('default', ['copy'], function(){
-	gulp.start('build-img','merge-css2','merge-js','html-replace');
+	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css');
 	//.pipe(lreload({start:true}));
 });
 
@@ -81,7 +81,7 @@ gulp.task('merge-js', function(){
 });
 
 //analisa e dá dicas sobre os arquivos .js
-gulp.task('dica', function(){
+gulp.task('dica-js', function(){
 	return gulp.src('js/**/*.js')
 	.pipe(jshint())
 	.pipe(jshint.reporter('default'));
