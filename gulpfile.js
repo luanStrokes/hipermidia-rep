@@ -9,11 +9,12 @@ const cssmin	   = require('gulp-cssmin');
 const rename	   = require('gulp-rename');
 const jshint	   = require('gulp-jshint');
 const lint		   = require('gulp-lint');
-const errorHandler = require('gulp-error-handle');
+const browserSync  = require('browser-sync').create();
+const sourcemaps   = require('gulp-sourcemaps');
 
 
 gulp.task('criar-dist', ['copy'], function(){
-	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css','build');
+	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css','javascript','browser-sync');
 });
 
 //copia de images para dist(criando-a caso não exista)
@@ -85,8 +86,21 @@ gulp.task('dica-css', function(){
 	.pipe(lint());;
 });
 
-gulp.task('build', function() {
-  return gulp.src('dist/css/*.css')
-    .pipe(errorHandler())
-    .pipe(gulp.dest('dist/build'));
+gulp.task('javascript', function() {
+  	gulp.src('js/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(jshint())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('dist/smaps'));
+});
+
+
+// Static server
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+    });
 });
