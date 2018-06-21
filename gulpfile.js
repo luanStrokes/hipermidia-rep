@@ -11,6 +11,7 @@ const jshint	   = require('gulp-jshint');
 const lint		   = require('gulp-lint');
 const browserSync  = require('browser-sync').create();
 const sourcemaps   = require('gulp-sourcemaps');
+const scss		   = require('gulp-css-scss');
 
 
 gulp.task('criar-dist', ['copy'], function(){
@@ -103,4 +104,11 @@ gulp.task('browser-sync', function() {
             baseDir: "./"
         }
     });
+});
+
+//CSS to SCSS
+gulp.task('css-to-scss', function() {
+	return gulp.src('dist/css/site.min.css')
+	.pipe(scss())
+	.pipe(gulp.dest('dist/scss'));
 });
