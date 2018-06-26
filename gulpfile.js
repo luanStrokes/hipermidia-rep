@@ -12,10 +12,12 @@ const lint		   = require('gulp-lint');
 const browserSync  = require('browser-sync').create();
 const sourcemaps   = require('gulp-sourcemaps');
 const scss		   = require('gulp-css-scss');
+const sprity 	   = require('sprity');
+const gulpif 	   = require('gulp-if');
 
 
 gulp.task('criar-dist', ['copy'], function(){
-	gulp.start('build-img','merge-css2','merge-js','html-replace','dica-js','dica-css','javascript','browser-sync');
+	gulp.start('build-img','merge-css','merge-js','html-replace','dica-js','dica-css','javascript','browser-sync');
 });
 
 //copia de images para dist(criando-a caso não exista)
@@ -39,8 +41,8 @@ gulp.task('clean', function() {
 
 //concatenar arquivos .css para arquivo site.css
 gulp.task('concatena-css', function(){
-	gulp.src('css/**/*.css')
-	.pipe(concat(site.css))
+	gulp.src(['css/responsive2.css','css/style2.css'])
+	.pipe(concat('site.css'))
 	.pipe(gulp.dest('dist/css'));
 });
 
@@ -52,7 +54,7 @@ gulp.task('html-replace', function(){
 
 //minifica arquivos .css com cleanCSS
 gulp.task('merge-css', function(){
-	gulp.src(['css/*.css'])
+	gulp.src(['css/responsive2.css','css/style2.css'])
 	.pipe(concat('site.min.css')) //concatena para arquivo site.min.css
 	.pipe(cleanCSS())
 	.pipe(gulp.dest('dist/css'));
@@ -60,7 +62,7 @@ gulp.task('merge-css', function(){
 
 //minifica arquivos .css com cssmin
 gulp.task('merge-css2', function(){
-	gulp.src(['css/*.css'])
+	gulp.src(['css/responsive2.css','css/style2.css'])
 	.pipe(cssmin())
 	.pipe(rename('site.min.css'))
 	.pipe(gulp.dest('dist/css'));
@@ -111,4 +113,13 @@ gulp.task('css-to-scss', function() {
 	return gulp.src('dist/css/site.min.css')
 	.pipe(scss())
 	.pipe(gulp.dest('dist/scss'));
+});
+
+gulp.task('sprites', function(){
+	return sprity.src({
+		src: './images/**/*.{png,jpg}',
+		style: './css/sprite.css',
+		processor: 'sass',
+	})
+	.pipe(gulpif('*.png',gulp.dest('./dist/img/'), gulp.dest('./dist/css')))
 });

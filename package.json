@@ -4,7 +4,11 @@
   "description": "ifma-hipermidia-18.1",
   "main": "index.js",
   "dependencies": {
-    "gulp-css-scss": "^0.1.0"
+    "gulp-css-scss": "^0.1.0",
+    "gulp-if": "^2.0.2",
+    "sprity": "^1.0.8",
+    "sprity-lwip": "^1.0.7",
+    "sprity-sass": "^1.0.4"
   },
   "devDependencies": {
     "browser-sync": "^2.24.4",

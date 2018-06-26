@@ -1,0 +1,65 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 22/12/2016 06:21
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.html");
+  src: url("../fonts/Flaticond41d.html?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../Flaticon.html") format("truetype"),
+       url("../fonts/Flaticon-2.html#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("fonts/Flaticon.html#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-avatar:before { content: "\f100"; }
+.flaticon-bag:before { content: "\f101"; }
+.flaticon-bathtub:before { content: "\f102"; }
+.flaticon-bed:before { content: "\f103"; }
+.flaticon-calendar-interface-symbol:before { content: "\f104"; }
+.flaticon-check-mark:before { content: "\f105"; }
+.flaticon-dollar-bills:before { content: "\f106"; }
+.flaticon-drawing:before { content: "\f107"; }
+.flaticon-envelope:before { content: "\f108"; }
+.flaticon-facebook-social-symbol:before { content: "\f109"; }
+.flaticon-google-plus:before { content: "\f10a"; }
+.flaticon-heart-with-electrocardiogram:before { content: "\f10b"; }
+.flaticon-home:before { content: "\f10c"; }
+.flaticon-hotel-bed:before { content: "\f10d"; }
+.flaticon-instagram-logo:before { content: "\f10e"; }
+.flaticon-left-arrow:before { content: "\f10f"; }
+.flaticon-magnifying-glass:before { content: "\f110"; }
+.flaticon-message:before { content: "\f111"; }
+.flaticon-note:before { content: "\f112"; }
+.flaticon-open-door:before { content: "\f113"; }
+.flaticon-paper-bill:before { content: "\f114"; }
+.flaticon-phone-receiver:before { content: "\f115"; }
+.flaticon-pin:before { content: "\f116"; }
+.flaticon-placeholder:before { content: "\f117"; }
+.flaticon-plane:before { content: "\f118"; }
+.flaticon-right-arrow:before { content: "\f119"; }
+.flaticon-rss-feed-symbol:before { content: "\f11a"; }
+.flaticon-sedan-car-front:before { content: "\f11b"; }
+.flaticon-set-square:before { content: "\f11c"; }
+.flaticon-tea-cup:before { content: "\f11d"; }
+.flaticon-technology:before { content: "\f11e"; }
+.flaticon-technology-1:before { content: "\f11f"; }
+.flaticon-twitter:before { content: "\f120"; }
+.flaticon-vimeo-big-logo:before { content: "\f121"; }
